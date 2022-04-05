@@ -3,24 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
+	// "strings"
 	"bufio"
 	"strconv"
 	"flag"
 )
 
-func getInputFileName() (fileName string) {
-	testFlagPointer := flag.Bool("t", false, "Use test file")
-	flag.Parse()
-
-	if (*testFlagPointer) {
-		fileName = "test_input.txt"
-	} else {
-		fileName = "input.txt"
-	}
-	return
-}
-
-func getData(fileName string) (lines []uint) {
+func getData() (lines []uint) {
 	file, err := os.Open(fileName)
 	if (err != nil) {
 		panic(err)
@@ -49,10 +38,17 @@ func calculateFuel(mass uint, recursively bool) (fuel uint) {
 }
 
 func main() {
-	fileName := getInputFileName()
+	fileName := "input.txt"
+	if (*flag.Bool("t", false, "asdf")) {
+		fileName = "test_input.txt"
+	}
+ 	flag.Parse()
+
+ 	
+ 	
 	var sumPart1 uint = 0
 	var sumPart2 uint = 0
-	for _, val := range getData(fileName) {
+	for _, val := range getData() {
 		sumPart1 += calculateFuel(val, false)
 		sumPart2 += calculateFuel(val, true)
 	}
